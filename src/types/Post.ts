@@ -4,7 +4,7 @@ export type PostType = {
   _id: string;
   title: string;
   image: string;
-  user: UserPostType;
+  author: UserPostType;
   viewsCount: number;
   commentsCount: number;
   tags: string[];

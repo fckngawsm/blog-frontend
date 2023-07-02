@@ -17,8 +17,6 @@ export const Home = () => {
     dispatch(getAllPosts());
   }, [dispatch]);
 
-  console.log(posts);
-
   return (
     <>
       <Tabs

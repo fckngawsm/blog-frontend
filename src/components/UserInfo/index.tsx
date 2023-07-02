@@ -3,19 +3,26 @@ import styles from "./UserInfo.module.scss";
 import { UserType } from "../../types/User";
 
 interface UserInfoProps
-  extends Pick<UserType, "avatarUrl" | "fullName" | "createdAt"> {}
+  extends Pick<UserType, "avatar" | "name" | "createdAt"> {}
 
-export const UserInfo = ({ avatarUrl, fullName, createdAt }: UserInfoProps) => {
+const localDate = new Intl.DateTimeFormat("en-Gb", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+});
+
+export const UserInfo = ({ avatar, name, createdAt }: UserInfoProps) => {
+  const joinedDate = localDate.format(new Date(createdAt!));
   return (
     <div className={styles.root}>
       <img
         className={styles.avatar}
-        src={avatarUrl || "/noavatar.png"}
-        alt={fullName}
+        src={avatar || "/noavatar.png"}
+        alt={name}
       />
       <div className={styles.userDetails}>
-        <span className={styles.userName}>{fullName}</span>
-        <span className={styles.additional}>{createdAt}</span>
+        <span className={styles.userName}>{name}</span>
+        <span className={styles.additional}>{joinedDate}</span>
       </div>
     </div>
   );

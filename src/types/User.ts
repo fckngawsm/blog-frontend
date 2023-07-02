@@ -1,6 +1,6 @@
 export type UserPostType = {
-  fullName: string;
-  avatarUrl: string;
+  name: string;
+  avatar: string;
   createdAt?: string;
 };
 
