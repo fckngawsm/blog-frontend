@@ -1,19 +1,26 @@
-import React from 'react';
-import clsx from 'clsx';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Clear';
-import EditIcon from '@mui/icons-material/Edit';
-import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
+import { ReactNode } from "react";
+import clsx from "clsx";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Clear";
+import EditIcon from "@mui/icons-material/Edit";
+import EyeIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import CommentIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 
-import styles from './Post.module.scss';
-import { UserInfo } from '../UserInfo';
-import { PostSkeleton } from './Skeleton';
+import styles from "./Post.module.scss";
+import { UserInfo } from "../UserInfo";
+import { PostSkeleton } from "./Skeleton";
+import { PostType } from "../../types/Post";
+
+interface PostProps extends PostType {
+  children: ReactNode;
+  isFullPost?: boolean;
+  isLoading?: boolean;
+  isEditable?: boolean;
+}
 
 export const Post = ({
   _id,
   title,
-  createdAt,
   imageUrl,
   user,
   viewsCount,
@@ -23,7 +30,7 @@ export const Post = ({
   isFullPost,
   isLoading,
   isEditable,
-}) => {
+}: PostProps) => {
   if (isLoading) {
     return <PostSkeleton />;
   }
@@ -52,9 +59,11 @@ export const Post = ({
         />
       )}
       <div className={styles.wrapper}>
-        <UserInfo {...user} additionalText={createdAt} />
+        <UserInfo {...user} />
         <div className={styles.indention}>
-          <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
+          <h2
+            className={clsx(styles.title, { [styles.titleFull]: isFullPost })}
+          >
             {isFullPost ? title : <a href={`/posts/${_id}`}>{title}</a>}
           </h2>
           <ul className={styles.tags}>
