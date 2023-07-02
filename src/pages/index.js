@@ -1,4 +1,4 @@
-export { Home } from "./Home";
+export { Home } from "../features/post/Home";
 export { FullPost } from "./FullPost";
 export { AddPost } from "./AddPost";
 export { Registration } from "./Registration";

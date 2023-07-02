@@ -22,7 +22,7 @@ interface PostProps extends PostType {
 export const Post = ({
   _id,
   title,
-  imageUrl,
+  image,
   user,
   viewsCount,
   commentsCount,
@@ -52,10 +52,10 @@ export const Post = ({
           </IconButton>
         </div>
       )}
-      {imageUrl && (
+      {image && (
         <img
           className={clsx(styles.image, { [styles.imageFull]: isFullPost })}
-          src={imageUrl}
+          src={image}
           alt={title}
         />
       )}

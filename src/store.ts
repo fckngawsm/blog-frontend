@@ -1,9 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import axios from "axios";
 import * as api from "./config";
+import { postReducer } from "./features/post/post-slice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    posts: postReducer,
+  },
   devTools: true,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

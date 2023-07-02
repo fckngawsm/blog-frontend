@@ -3,7 +3,7 @@ import { UserPostType } from "./User";
 export type PostType = {
   _id: string;
   title: string;
-  imageUrl: string;
+  image: string;
   user: UserPostType;
   viewsCount: number;
   commentsCount: number;
