@@ -1,5 +1,5 @@
 import { Post } from "../components/Post";
-import { Index } from "../components/AddComment";
+import { Index as AddComment } from "../components/AddComment";
 import { CommentsBlock } from "../components/CommentsBlock";
 
 export const FullPost = () => {
@@ -28,7 +28,7 @@ export const FullPost = () => {
           roast as hard as you can!!
         </p>
       </Post>
-      <CommentsBlock
+      {/* <CommentsBlock
         // items={[
         //   {
         //     user: {
@@ -47,8 +47,8 @@ export const FullPost = () => {
         // ]}
         isLoading={false}
       >
-        <Index />
-      </CommentsBlock>
+        <AddComment />
+      </CommentsBlock> */}
     </>
   );
 };

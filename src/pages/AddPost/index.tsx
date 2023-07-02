@@ -2,37 +2,22 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import SimpleMDE from "react-simplemde-editor";
+// import SimpleMDE from "react-simplemde-editor";
 
 import "easymde/dist/easymde.min.css";
 import styles from "./AddPost.module.scss";
 
 export const AddPost = () => {
   const imageUrl = "";
-  const [value, setValue] = React.useState("");
+  // const [value, setValue] = React.useState("");
 
   const handleChangeFile = () => {};
 
   const onClickRemoveImage = () => {};
 
-  const onChange = React.useCallback((value: string) => {
-    setValue(value);
-  }, []);
-
-  const options = React.useMemo(
-    () => ({
-      spellChecker: false,
-      maxHeight: "400px",
-      autofocus: true,
-      placeholder: "Введите текст...",
-      status: false,
-      autosave: {
-        enabled: true,
-        delay: 1000,
-      },
-    }),
-    []
-  );
+  // const onChange = React.useCallback((value: string) => {
+  //   setValue(value);
+  // }, []);
 
   return (
     <Paper style={{ padding: 30 }}>
@@ -66,12 +51,12 @@ export const AddPost = () => {
         placeholder="Тэги"
         fullWidth
       />
-      <SimpleMDE
+      {/* <SimpleMDE
         className={styles.editor}
         value={value}
         onChange={onChange}
         options={options}
-      />
+      /> */}
       <div className={styles.buttons}>
         <Button size="large" variant="contained">
           Опубликовать
