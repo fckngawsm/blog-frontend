@@ -8,17 +8,26 @@ import { TagsBlock } from "../../components/TagsBlock";
 import { CommentsBlock } from "../../components/CommentsBlock";
 import { useAppDispatch, useAppSelector } from "../../redux-hooks";
 import { getAllPosts, getLastTags } from "./post-slice";
-import { postsInfoSelectors } from "./post-selectors";
+import {
+  postsSelectors,
+  postsStatusSelectors,
+  tagsSelectors,
+} from "./post-selectors";
 
 export const Home = () => {
   const dispatch = useAppDispatch();
-  const { posts, status, tags } = useAppSelector(postsInfoSelectors);
+  // const { posts, status, tags } = useAppSelector(postsInfoSelectors);
+  const posts = useAppSelector(postsSelectors);
+  const status = useAppSelector(postsStatusSelectors);
+  const tags = useAppSelector(tagsSelectors);
   const isTagsLoading = status === "loading";
 
   useEffect(() => {
-    dispatch(getAllPosts());
-    dispatch(getLastTags());
-  }, [dispatch]);
+    if (posts.length === 0) {
+      dispatch(getAllPosts());
+      dispatch(getLastTags());
+    }
+  }, [dispatch, posts]);
 
   return (
     <>

@@ -5,23 +5,22 @@ import { CommentsBlock } from "../../components/CommentsBlock";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux-hooks";
 import { getPostsById } from "./fullPost-slice";
-import { postsInfoSelectors } from "./fullPostSelectors";
+import { currentPostSelector } from "./fullPostSelectors";
 
 export const FullPost = () => {
-  const { currentPost, error, status } = useAppSelector(postsInfoSelectors);
+  const currentPost = useAppSelector(currentPostSelector);
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  console.log(currentPost);
 
   useEffect(() => {
-    if (id) dispatch(getPostsById(id));
+    dispatch(getPostsById(id!));
   }, [dispatch, id]);
 
   return (
     <>
       {currentPost && (
         <Post
-          _id={currentPost?._id}
+          _id={currentPost._id}
           title={currentPost.title}
           image={currentPost.image}
           author={{ ...currentPost.author }}
