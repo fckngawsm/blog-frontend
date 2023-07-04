@@ -35,7 +35,7 @@ export const getPostsById = createAsyncThunk<
 );
 
 const fullPostSlice = createSlice({
-  name: "@posts/load-full-post",
+  name: "@@posts/load-full-post",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

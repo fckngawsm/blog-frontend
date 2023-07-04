@@ -13,7 +13,6 @@ import { PostType } from "../../types/Post";
 import { Link } from "react-router-dom";
 
 interface PostProps extends PostType {
-  children: ReactNode;
   isFullPost?: boolean;
   isLoading?: boolean;
   isEditable?: boolean;
@@ -27,7 +26,7 @@ export const Post = ({
   viewsCount,
   commentsCount,
   tags,
-  children,
+  description,
   isFullPost,
   isLoading,
   isEditable,
@@ -73,7 +72,11 @@ export const Post = ({
               </li>
             ))}
           </ul>
-          {children && <div className={styles.content}>{children}</div>}
+          {description && (
+            <div className={styles.content}>
+              <p>{description}</p>
+            </div>
+          )}
           <ul className={styles.postDetails}>
             <li>
               <EyeIcon />
