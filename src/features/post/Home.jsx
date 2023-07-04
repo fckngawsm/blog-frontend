@@ -12,14 +12,14 @@ import { postsInfoSelectors } from "./post-selectors";
 
 export const Home = () => {
   const dispatch = useAppDispatch();
-  const { error, posts, status, tags } = useAppSelector(postsInfoSelectors);
+  const { posts, status, tags } = useAppSelector(postsInfoSelectors);
   const isTagsLoading = status === "loading";
 
   useEffect(() => {
     dispatch(getAllPosts());
     dispatch(getLastTags());
   }, [dispatch]);
-  console.log(tags);
+
   return (
     <>
       <Tabs

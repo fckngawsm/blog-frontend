@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import axios from "axios";
 import * as api from "./config";
 import { postReducer } from "./features/post/post-slice";
+import { fullPustReducer } from "./features/fullPost/fullPost-slice";
 
 export const store = configureStore({
   reducer: {
     posts: postReducer,
+    fullPost: fullPustReducer,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>
