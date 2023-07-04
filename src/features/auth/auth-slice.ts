@@ -35,6 +35,27 @@ export const registerUser = createAsyncThunk<
   }
 );
 
+export const loginUser = createAsyncThunk<
+  {},
+  UserType,
+  { extra: Extra; rejectWithValue: string }
+>(
+  "@@auth/login",
+  async (dataUser, { extra: { client, api }, rejectWithValue }) => {
+    try {
+      const { data } = await client.post(api.LOGIN_USER, dataUser, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return data;
+    } catch (err) {
+      return rejectWithValue("Ошибка");
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "@@auth",
   initialState,
@@ -51,8 +72,10 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.status = "received";
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        console.log(action.payload, "action paylaod");
+        console.log(state.user);
       });
   },
 });
