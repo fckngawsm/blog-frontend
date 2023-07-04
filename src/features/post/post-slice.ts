@@ -8,12 +8,14 @@ type PostsSlice = {
   status: StatusType;
   error: string | null;
   list: PostType[];
+  tags: PostType["tags"];
 };
 
 const initialState: PostsSlice = {
   status: "idle",
   error: null,
   list: [],
+  tags: [],
 };
 
 export const getAllPosts = createAsyncThunk<
@@ -25,6 +27,24 @@ export const getAllPosts = createAsyncThunk<
   async (_, { extra: { client, api }, rejectWithValue }) => {
     try {
       return client.get(api.ALL_POSTS);
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue("Unknown error");
+    }
+  }
+);
+
+export const getLastTags = createAsyncThunk<
+  { data: PostType["tags"] },
+  undefined,
+  { extra: Extra; rejectValue: string }
+>(
+  "@@posts/load-tags",
+  async (_, { extra: { client, api }, rejectWithValue }) => {
+    try {
+      return client.get(api.LAST_TAGS);
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
@@ -51,6 +71,12 @@ const postSlice = createSlice({
       .addCase(getAllPosts.fulfilled, (state, action) => {
         state.status = "received";
         state.list = action.payload.data;
+        console.log(action.payload);
+      })
+      .addCase(getLastTags.fulfilled, (state, action) => {
+        state.status = "received";
+        state.tags = action.payload.data;
+        console.log(action.payload);
       });
   },
 });

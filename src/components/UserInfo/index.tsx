@@ -5,14 +5,15 @@ import { UserType } from "../../types/User";
 interface UserInfoProps
   extends Pick<UserType, "avatar" | "name" | "createdAt"> {}
 
-const localDate = new Intl.DateTimeFormat("en-Gb", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-});
+// const localDate = new Intl.DateTimeFormat("en-Gb", {
+//   day: "numeric",
+//   month: "short",
+//   year: "numeric",
+// });
 
 export const UserInfo = ({ avatar, name, createdAt }: UserInfoProps) => {
-  const joinedDate = localDate.format(new Date(createdAt!));
+  // const joinedDate = localDate.format(new Date(createdAt!));
+  // console.log(joinedDate);
   return (
     <div className={styles.root}>
       <img
@@ -22,7 +23,7 @@ export const UserInfo = ({ avatar, name, createdAt }: UserInfoProps) => {
       />
       <div className={styles.userDetails}>
         <span className={styles.userName}>{name}</span>
-        <span className={styles.additional}>{joinedDate}</span>
+        <span className={styles.additional}>{createdAt}</span>
       </div>
     </div>
   );

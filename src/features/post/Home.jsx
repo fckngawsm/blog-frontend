@@ -7,16 +7,19 @@ import { Post } from "../../components/Post";
 import { TagsBlock } from "../../components/TagsBlock";
 import { CommentsBlock } from "../../components/CommentsBlock";
 import { useAppDispatch, useAppSelector } from "../../redux-hooks";
-import { getAllPosts } from "./post-slice";
-import { postsSelectors } from "./post-selectors";
+import { getAllPosts, getLastTags } from "./post-slice";
+import { postsInfoSelectors } from "./post-selectors";
 
 export const Home = () => {
   const dispatch = useAppDispatch();
-  const posts = useAppSelector(postsSelectors);
+  const { error, posts, status, tags } = useAppSelector(postsInfoSelectors);
+  const isTagsLoading = status === "loading";
+
   useEffect(() => {
     dispatch(getAllPosts());
+    dispatch(getLastTags());
   }, [dispatch]);
-
+  console.log(tags);
   return (
     <>
       <Tabs
@@ -30,14 +33,11 @@ export const Home = () => {
       <Grid container spacing={4}>
         <Grid xs={8} item>
           {posts.map((post) => (
-            <Post {...post} />
+            <Post key={post._id} {...post} />
           ))}
         </Grid>
         <Grid xs={4} item>
-          <TagsBlock
-            items={["react", "typescript", "заметки"]}
-            isLoading={false}
-          />
+          <TagsBlock tags={tags} isLoading={isTagsLoading} />
           <CommentsBlock
             items={[
               {
