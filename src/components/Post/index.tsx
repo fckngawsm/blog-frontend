@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import clsx from "clsx";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Clear";
@@ -31,6 +30,7 @@ export const Post = ({
   isLoading,
   isEditable,
 }: PostProps) => {
+  console.log(author._id)
   if (isLoading) {
     return <PostSkeleton />;
   }

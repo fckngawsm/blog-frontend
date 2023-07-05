@@ -4,12 +4,16 @@ import Button from "@mui/material/Button";
 import styles from "./Header.module.scss";
 import Container from "@mui/material/Container";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux-hooks";
+import { authUserSelectors } from "../../features/auth/auth-selectors";
+import { userLogout } from "../../features/auth/auth-slice";
 
 export const Header = () => {
-  const isAuth = false;
-
-  const onClickLogout = () => {};
-
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(authUserSelectors);
+  const onClickLogout = () => {
+    dispatch(userLogout());
+  };
   return (
     <div className={styles.root}>
       <Container maxWidth="lg">

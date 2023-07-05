@@ -6,3 +6,4 @@ export const POST_BY_ID = (id: string) => BASE_URL + `posts/${id}`;
 // user
 export const REGISTER_USER = BASE_URL + "auth/signup";
 export const LOGIN_USER = BASE_URL + "auth/signin";
+export const CHECK_JWT = BASE_URL + "users/me";

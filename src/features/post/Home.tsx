@@ -13,15 +13,15 @@ import {
   postsStatusSelectors,
   tagsSelectors,
 } from "./post-selectors";
+import { authUserSelectors } from "../auth/auth-selectors";
 
 export const Home = () => {
   const dispatch = useAppDispatch();
-  // const { posts, status, tags } = useAppSelector(postsInfoSelectors);
   const posts = useAppSelector(postsSelectors);
   const status = useAppSelector(postsStatusSelectors);
   const tags = useAppSelector(tagsSelectors);
+  const currentUser = useAppSelector(authUserSelectors);
   const isTagsLoading = status === "loading";
-
   useEffect(() => {
     if (posts.length === 0) {
       dispatch(getAllPosts());
@@ -42,7 +42,11 @@ export const Home = () => {
       <Grid container spacing={4}>
         <Grid xs={8} item>
           {posts.map((post) => (
-            <Post key={post._id} {...post} />
+            <Post
+              key={post._id}
+              {...post}
+              isEditable={post.author._id === currentUser?._id}
+            />
           ))}
         </Grid>
         <Grid xs={4} item>

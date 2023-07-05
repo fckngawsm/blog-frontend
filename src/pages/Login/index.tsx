@@ -9,17 +9,26 @@ import styles from "./Login.module.scss";
 import { UserType } from "../../types/User";
 import { useAppDispatch } from "../../redux-hooks";
 import { loginUser } from "../../features/auth/auth-slice";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<UserType>();
 
-  const onSubmit = (data: UserType) => {
-    dispatch(loginUser(data));
+  const onSubmit = async (data: UserType) => {
+    dispatch(loginUser(data))
+      .unwrap()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <Paper classes={{ root: styles.root }}>

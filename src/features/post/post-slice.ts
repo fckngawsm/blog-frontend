@@ -71,12 +71,10 @@ const postSlice = createSlice({
       .addCase(getAllPosts.fulfilled, (state, action) => {
         state.status = "received";
         state.list = action.payload.data;
-        console.log(action.payload);
       })
       .addCase(getLastTags.fulfilled, (state, action) => {
         state.status = "received";
         state.tags = action.payload.data;
-        console.log(action.payload);
       });
   },
 });
